@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-ink: #0a0f1c;
+  --bg-navy: #111827;
+  --sapphire: #4f74e8;
+  --gold: #e0b860;
+  --text-heading: #f7f2e8;
+  --text-body: #aeb6c6;
+}
+
+html {
+  background-color: #0a0f1c;
+  color: #aeb6c6;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(224, 184, 96, 0.35);
+  color: #f7f2e8;
+}
+
+body {
+  background-color: #0a0f1c;
+  color: #aeb6c6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle film grain overlay */
+.film-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Navy glassmorphism card */
+.glass-card {
+  background: rgba(17, 24, 39, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(79, 116, 232, 0.22);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(247, 242, 232, 0.05);
+}
+
+.glass-card:hover {
+  border-color: rgba(224, 184, 96, 0.45);
+}
+
+/* Gradient text — Ivory → Gold */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f7f2e8 0%, #f2d892 40%, #e0b860 70%, #c08f35 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Marquee animation (transform only) */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 34s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
